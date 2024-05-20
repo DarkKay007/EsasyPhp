@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f0d4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        span {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">     
+        <h1>Nombre: <span id="name"></span></h1>
+        <h2>Genero: <span id="sex"></span></h2>
+        <h2>Edad: <span id="age"></span></h2>
+        <h2>Email: <span id="email"></span></h2>
+        <h2>Telefono: <span id="phone"></span></h2>
+        <h2>Direcion:<span id="street"></span> Con el Numero <span id="number"></span> De <span id="city"></span>, <span id="country"></span></h2>
+        <h2>Info: <span id="Info"></span></h2>
+    </div>
+    
+    <script>
+        fetch("http://localhost/easyapiphp/api.php/quince")
+        .then(response => response.json())
+        .then(data => {
+            const name = data.name;
+            const h1Element = document.getElementById("name");
+            h1Element.textContent = name;
+
+            document.getElementById("sex").textContent = data.gender;
+            
+            document.getElementById("age").textContent = data.age;  
+
+            document.getElementById("email").textContent = data.email;  
+
+            document.getElementById("phone").textContent = data.phone;  
+
+            document.getElementById("Info").textContent = data.descrip;
+            
+            document.getElementById("street").textContent = data.address.street;
+            document.getElementById("number").textContent = data.address.number;
+            document.getElementById("city").textContent = data.address.city;
+            document.getElementById("country").textContent = data.address.country;
+
+
+
+            
+            // const h2Element = document.getElementById("resultado");
+            //h2Element.textContent = JSON.stringify(data);
+        
+        })
+        
+        .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
